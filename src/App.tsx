@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen items-center">
+    <div className="box-border border-4 border-green-500 flex flex-col h-screen items-center my-20 pb-32 md:pb-0 md:my-0 w-[calc(100%-48px)] md:w-full">
       <Header />
       <div className="flex flex-col flex-grow overflow-y-auto w-4/5">
         {chatHistory.map((message, index) => {
@@ -37,7 +37,7 @@ function App() {
           );
         })}
       </div>
-      <form onSubmit={handleSend} className="mx-auto mt-auto pb-12 flex w-full max-w-sm items-center space-x-2">
+      <form onSubmit={handleSend} className="mx-auto mt-auto pb-12 pt-4 flex w-full max-w-md items-center space-x-2 px-4 md:px-0">
         <Input
           type="text"
           placeholder="tell me something interesting."
