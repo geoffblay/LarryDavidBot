@@ -71,8 +71,8 @@ async function sendMessage(message: string, chatHistory: BaseMessage[], setChatH
     config
   );
 
-  const newMessage = new HumanMessage({ content: message });
-  const larryMessage = new AIMessage({ content: response.content });
+  const newMessage = new HumanMessage({ content: message, name: "User" });
+  const larryMessage = new AIMessage({ content: response.content, name: "Larry David" });
   // setChatHistory([...chatHistory, newMessage]);
   // setChatHistory([...chatHistory, larryMessage]);
   setChatHistory([...chatHistory, newMessage, larryMessage]);

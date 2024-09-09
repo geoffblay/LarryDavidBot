@@ -31,7 +31,7 @@ function App() {
             <ChatBubble
               key={index}
               message={message.content.toString()}
-              sender={message.constructor.name === 'HumanMessage' ? 'user' : 'ai'}
+              sender={message.name === 'User' ? 'user' : 'ai'}
               timestamp={timestamp}
             />
           );
