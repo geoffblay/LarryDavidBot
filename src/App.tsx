@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className="box-border border-4 border-green-500 flex flex-col h-screen items-center my-20 pb-32 md:pb-0 md:my-0 w-[calc(100%-48px)] md:w-full">
+    <div className="box-border border-4 border-green-500 flex flex-col h-screen items-center">
       <Header />
       <div className="flex flex-col flex-grow overflow-y-auto w-4/5">
         {chatHistory.map((message, index) => {
