@@ -26,7 +26,7 @@ export function ChatBubble({ message, sender, timestamp }: ChatBubbleProps) {
 
   return (
     <div className={`flex ${sender === "user" ? "justify-end" : "justify-start"} mb-4`}>
-      <div className={`border-4 border-blue-500 flex ${sender === "user" ? "flex-row-reverse" : "flex-row"} items-end`}>
+      <div className={`flex ${sender === "user" ? "flex-row-reverse" : "flex-row"} items-end`}>
         <Avatar className="w-8 h-8 my-auto">
           <img
             alt={sender === "user" ? "User Avatar" : "AI Avatar"}
