@@ -5,6 +5,9 @@ import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Copy, Check } from "lucide-react";
+// import larry-david.png
+import larryDavid from "@/assets/larry-david.png";
+import userImage from "@/assets/user.png";
 
 interface ChatBubbleProps {
   message: string;
@@ -23,11 +26,11 @@ export function ChatBubble({ message, sender, timestamp }: ChatBubbleProps) {
 
   return (
     <div className={`flex ${sender === "user" ? "justify-end" : "justify-start"} mb-4`}>
-      <div className={`flex ${sender === "user" ? "flex-row-reverse" : "flex-row"} items-end`}>
-        <Avatar className="w-8 h-8">
+      <div className={`border-4 border-blue-500 flex ${sender === "user" ? "flex-row-reverse" : "flex-row"} items-end`}>
+        <Avatar className="w-8 h-8 my-auto">
           <img
             alt={sender === "user" ? "User Avatar" : "AI Avatar"}
-            src="/placeholder.svg?height=32&width=32"
+            src={sender === "ai" ? larryDavid : userImage}
           />
         </Avatar>
         <div className={`mx-2 ${sender === "user" ? "bg-primary text-primary-foreground" : "bg-secondary"} rounded-lg p-3 max-w-md`}>
