@@ -5,6 +5,7 @@ import { ChatBubble } from './components/chat-bubble'
 import { useState } from 'react'
 import { sendMessage } from './api/groq-chat'
 import type { BaseMessage } from "@langchain/core/messages";
+import ghub from './assets/github.svg'
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
   }
 
   return (
-    <div className="box-border border-4 border-green-500 flex flex-col h-screen items-center my-20 pb-32 md:pb-0 md:my-0 w-[calc(100%-48px)] md:w-full">
+    <div className="box-border flex flex-col h-dvh items-center">
       <Header />
       <div className="flex flex-col flex-grow overflow-y-auto w-4/5">
         {chatHistory.map((message, index) => {
@@ -37,7 +38,7 @@ function App() {
           );
         })}
       </div>
-      <form onSubmit={handleSend} className="mx-auto mt-auto pb-12 pt-4 flex w-full max-w-md items-center space-x-2 px-4 md:px-0">
+      <form onSubmit={handleSend} className="mx-auto mt-auto pb-8 pt-4 flex w-full max-w-md items-center space-x-2 px-4 md:px-0">
         <Input
           type="text"
           placeholder="tell me something interesting."
@@ -46,6 +47,9 @@ function App() {
         />
         <Button type="submit">send</Button>
       </form>
+      <a href="https://github.com/geoffblay" className="flex items-center mb-4">
+        <img src={ghub} alt="github" className="h-6 w-6 opacity-50" />
+      </a>
     </div>
   )
 }
