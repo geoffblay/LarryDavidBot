@@ -13,7 +13,7 @@ function App() {
     event.preventDefault()
     console.log(inputValue)
     setInputValue('')
-    await sendMessage()
+    await sendMessage('hey')
   }
 
   return (

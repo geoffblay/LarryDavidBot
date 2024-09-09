@@ -13,9 +13,45 @@ async function sendMessage(message: string) {
     apiKey: import.meta.env.VITE_GROQ_API_KEY
   });
 
-  
+  const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 
-  const response = await model.invoke([new HumanMessage({ content: message })]);
+  const prompt = ChatPromptTemplate.fromMessages([
+    [
+      "system",
+      `You are Larry David.`,
+    ],
+    ["placeholder", "{chat_history}"],
+    ["human", "{input}"],
+  ]);
+  
+  const chain = prompt.pipe(model);
+  
+  const withMessageHistory = new RunnableWithMessageHistory({
+    runnable: chain,
+    getMessageHistory: async (sessionId) => {
+      if (messageHistories[sessionId] === undefined) {
+        messageHistories[sessionId] = new InMemoryChatMessageHistory();
+      }
+      return messageHistories[sessionId];
+    },
+    inputMessagesKey: "input",
+    historyMessagesKey: "chat_history",
+  });
+
+  const config = {
+    configurable: {
+      sessionId: "abc2",
+    },
+  };
+  
+  const response = await withMessageHistory.invoke(
+    {
+      input: "How's your day going?",
+    },
+    config
+  );
+
+  // const response = await model.invoke([new HumanMessage({ content: message })]);
 
   // Handle the response here
   console.log(response);
