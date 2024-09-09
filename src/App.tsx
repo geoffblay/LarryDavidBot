@@ -3,17 +3,18 @@ import { Input } from './components/ui/input'
 import { Button } from './components/ui/button'
 import { ChatBubble } from './components/chat-bubble'
 import { useState } from 'react'
+import { sendMessage } from './api/groq-chat'
 
 
 function App() {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   const handleSend = async (event: React.FormEvent) => {
     event.preventDefault()
     console.log(inputValue)
     setInputValue('')
+    await sendMessage()
   }
-
 
   return (
     <div className="flex flex-col h-screen items-center">
