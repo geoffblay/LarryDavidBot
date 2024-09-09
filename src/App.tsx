@@ -4,23 +4,25 @@ import { Button } from './components/ui/button'
 import { ChatBubble } from './components/chat-bubble'
 import { useState } from 'react'
 import { sendMessage } from './api/groq-chat'
+import type { BaseMessage } from "@langchain/core/messages";
 
 
 function App() {
   const [inputValue, setInputValue] = useState('');
+  const [chatHistory, setChatHistory] = useState<BaseMessage[]>([]);
 
   const handleSend = async (event: React.FormEvent) => {
     event.preventDefault()
     console.log(inputValue)
     setInputValue('')
-    await sendMessage('hey')
+    await sendMessage(inputValue, chatHistory, setChatHistory)
   }
 
   return (
     <div className="flex flex-col h-screen items-center">
       <Header />
       <div className="flex flex-col flex-grow overflow-y-auto w-4/5 border border-black">
-        <ChatBubble
+        {/* <ChatBubble
           message="Hello, I'm a chatbot. How can I help you today?"
           sender="ai"
           timestamp="12:34 PM"
@@ -54,7 +56,18 @@ function App() {
           message="That's great! Do you have a resume or a portfolio that you can share with me?"
           sender="ai"
           timestamp="12:40 PM"
-        />
+        /> */}
+        {chatHistory.map((message, index) => {
+          const timestamp = new Date().toLocaleTimeString();
+          return (
+            <ChatBubble
+              key={index}
+              message={message.content.toString()}
+              sender={message.constructor.name === 'HumanMessage' ? 'user' : 'ai'}
+              timestamp={timestamp}
+            />
+          );
+        })}
       </div>
       <form onSubmit={handleSend} className="border-4 border-red-500 mx-auto mt-auto pb-12 flex w-full max-w-sm items-center space-x-2">
         <Input
