@@ -10,11 +10,14 @@ import type { BaseMessage } from "@langchain/core/messages";
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [chatHistory, setChatHistory] = useState<BaseMessage[]>([]);
+  const [timestamps, setTimestamps] = useState<string[]>([]);
 
   const handleSend = async (event: React.FormEvent) => {
     event.preventDefault()
     console.log(inputValue)
     setInputValue('')
+    const timestamp = new Date().toLocaleTimeString();
+    setTimestamps([...timestamps, timestamp, timestamp])
     await sendMessage(inputValue, chatHistory, setChatHistory)
   }
 
@@ -23,7 +26,7 @@ function App() {
       <Header />
       <div className="flex flex-col flex-grow overflow-y-auto w-4/5">
         {chatHistory.map((message, index) => {
-          const timestamp = new Date().toLocaleTimeString();
+          const timestamp = timestamps[index];
           return (
             <ChatBubble
               key={index}
